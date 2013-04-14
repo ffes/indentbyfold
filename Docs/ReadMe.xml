@@ -3,42 +3,57 @@
 <!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
 
 <article>
+
 	<articleinfo>
-		<author><firstname>Frank</firstname><surname>Fesevur</surname></author>
-		<pubdate>2013-04-14</pubdate>
 		<title>IndentByFold plugin for Notepad++</title>
 		<titleabbrev>IndentByFold</titleabbrev>
+		<author><firstname>Frank</firstname><surname>Fesevur</surname></author>
+		<pubdate>2013-04-14</pubdate>
 	</articleinfo>
 
-	<sect1>
+	<sect1 id="install">
 		<title>Installation Note</title>
-		<para>Disable Notepad++'s Auto Indent. Go to Settings - Preferences - MISC and untick Auto Indent.</para>
+		<para>For the plugin to work properly it is important to disable Notepad++'s builtin Auto Indent. Go to Settings - Preferences - MISC and untick Auto Indent.</para>
 	</sect1>
 
-	<sect1>
+	<sect1 id="history">
 		<title>History</title>
 		<para>In May 2011 Ben Bluemel released the first version of the IndentByFold plugin. He released three version, up till 0.7. But since them he switched away from Notepad++ and did not developing his plugins anymore. In April 2013 Frank Fesevur took over maintenance of the plugin.</para>
 	</sect1>
 
-	<sect1>
+	<sect1 id="faq">
 		<title>Frequently Asked Questions</title>
-		<para>Q: I've tried out your plugin, and while it works beautifully for HTML, I couldn't get it to work for Python. I open a new file, set the language to Python, start typing - no indenting. I use the "Reindent File" command - no indenting. What can I do to make it work?</para>
-		<para>A: Python has a bit of a conflict here, Python's fold points are generated dependent on indentation, and this plugin is dependent on fold points to know how to do the indentation. Not really much I can do about this I'm afraid.</para>
-		<para>Q: In CSS, "}" brackets don't indent left like they do in the C-based languages. Between &lt;style&gt; tags in HTML, indentation doesn't happen at all.</para>
-		<para>A: This is an issue with the CSS lexer in Scintilla, rather than in IndentByFold. It's inconsistent in that it sets the next line's fold level to be the same as the current.</para>
+		<qandaset>
+			<qandaentry>
+				<question><para>
+					The plugin works beautifully for HTML, but I couldn't get it to work for Python. I open a new file, set the language to Python, start typing - no indenting. I use the "Reindent File" command - no indenting. What can I do to make it work?
+				</para></question>
+				<answer><para>
+					Python has a bit of a conflict here, Python's fold points are generated dependent on indentation, and this plugin is dependent on fold points to know how to do the indentation. Not really much I can do about this I'm afraid.
+				</para></answer>
+			</qandaentry>
+			<qandaentry>
+				<question><para>
+					In CSS, "}" brackets don't indent left like they do in the C-based languages. Between &lt;style&gt; tags in HTML, indentation doesn't happen at all.
+				</para></question>
+				<answer><para>
+					This is an issue with the CSS lexer in Scintilla, rather than in IndentByFold. It's inconsistent in that it sets the next line's fold level to be the same as the current.
+				</para></answer>
+			</qandaentry>
+		</qandaset>
 	</sect1>
 
-	<sect1>
+	<sect1 id="revhistory">
 		<title>Revision History</title>
-		
+
 		<sect2>
-			<title>Version 0.7.1, 2012-04-XX</title>
+			<title>Version 0.7.1, 2013-04-14</title>
 			<itemizedlist>
 				<listitem><para>Frank Fesevur has taken over the maintenance of this plugin.</para></listitem>
 				<listitem><para>Restructured the source files to personal preference.</para></listitem>
 				<listitem><para>Solution files for VS2005 are provided as well.</para></listitem>
 				<listitem><para>Fixed one small problem: Reindent file is now one undo action.</para></listitem>
-				<listitem><para>Started the write documentation. This is the first result.</para></listitem>
+				<listitem><para>Started the write documentation using DocBook. This is the first result. The current FAQ is based upon issues posted on <ulink url="https://bitbucket.org/bbluemel/indentbyfold/issues">Ben's BitBucket</ulink> page. The revision history until version 0.7 are taken from the <ulink url="http://sourceforge.net/p/notepad-plus/discussion/482781/thread/246f82f6">forum post</ulink> about this plugin.</para></listitem>
 			</itemizedlist>
 		</sect2>
 
