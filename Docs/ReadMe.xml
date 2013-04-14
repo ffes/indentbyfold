@@ -21,6 +21,12 @@
 		<para>In May 2011 Ben Bluemel released the first version of the IndentByFold plugin. He released three version, up till 0.7. But since them he switched away from Notepad++ and did not developing his plugins anymore. In April 2013 Frank Fesevur took over maintenance of the plugin.</para>
 	</sect1>
 
+	<sect1 id="contact">
+		<title>Contact</title>
+		<para>The plugin's web page can be found at <ulink url="https://code.google.com/p/indentbyfold/">https://code.google.com/p/indentbyfold/</ulink>. The downloads and issue tracker can be found there as well.  The git repository is at <ulink url="https://github.com/ffes/indentbyfold">https://github.com/ffes/indentbyfold</ulink>.</para>
+		<para>If you have problems with, questions about or suggestions for IndentByFold and you want to contact me directly, you can send me an email at <ulink url="mailto:fesevur@gmail.com">fesevur@gmail.com</ulink>.</para>
+	</sect1>
+
 	<sect1 id="faq">
 		<title>Frequently Asked Questions</title>
 		<qandaset>
