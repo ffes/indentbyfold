@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+
+<article>
+	<articleinfo>
+		<author><firstname>Frank</firstname><surname>Fesevur</surname></author>
+		<pubdate>2013-04-14</pubdate>
+		<title>IndentByFold plugin for Notepad++</title>
+		<titleabbrev>IndentByFold</titleabbrev>
+	</articleinfo>
+
+	<sect1>
+		<title>Installation Note</title>
+		<para>Disable Notepad++'s Auto Indent. Go to Settings - Preferences - MISC and untick Auto Indent.</para>
+	</sect1>
+
+	<sect1>
+		<title>History</title>
+		<para>In May 2011 Ben Bluemel released the first version of the IndentByFold plugin. He released three version, up till 0.7. But since them he switched away from Notepad++ and did not developing his plugins anymore. In April 2013 Frank Fesevur took over maintenance of the plugin.</para>
+	</sect1>
+
+	<sect1>
+		<title>Frequently Asked Questions</title>
+		<para>Q: I've tried out your plugin, and while it works beautifully for HTML, I couldn't get it to work for Python. I open a new file, set the language to Python, start typing - no indenting. I use the "Reindent File" command - no indenting. What can I do to make it work?</para>
+		<para>A: Python has a bit of a conflict here, Python's fold points are generated dependent on indentation, and this plugin is dependent on fold points to know how to do the indentation. Not really much I can do about this I'm afraid.</para>
+		<para>Q: In CSS, "}" brackets don't indent left like they do in the C-based languages. Between &lt;style&gt; tags in HTML, indentation doesn't happen at all.</para>
+		<para>A: This is an issue with the CSS lexer in Scintilla, rather than in IndentByFold. It's inconsistent in that it sets the next line's fold level to be the same as the current.</para>
+	</sect1>
+
+	<sect1>
+		<title>Revision History</title>
+		
+		<sect2>
+			<title>Version 0.7.1, 2012-04-XX</title>
+			<itemizedlist>
+				<listitem><para>Frank Fesevur has taken over the maintenance of this plugin.</para></listitem>
+				<listitem><para>Restructured the source files to personal preference.</para></listitem>
+				<listitem><para>Solution files for VS2005 are provided as well.</para></listitem>
+				<listitem><para>Fixed one small problem: Reindent file is now one undo action.</para></listitem>
+				<listitem><para>Started the write documentation. This is the first result.</para></listitem>
+			</itemizedlist>
+		</sect2>
+
+		<sect2>
+			<title>Version 0.7, 2011-09-18</title>
+			<para>This release fixes issues with certain lexers that notify on the following line (Ruby, HTML, Lisp, Lua, Pascal, XML). For these lexers you need to have a line following the one you are typing on.</para>
+			<para>The following screencast shows it in use and how it works: <ulink url="http://screencast.com/t/tUD2nfeLX">http://screencast.com/t/tUD2nfeLX</ulink></para>
+		</sect2>
+
+		<sect2>
+			<title>Version 0.6, 2011-06-19</title>
+			<para>This changes IndentByFold to more heavily rely on the SC_MOD_CHANGEFOLD notification from Scintilla.</para>
+			<para>This means that when you end a fold (e.g. with a } ) it will unindent to the same level as the start of the fold.</para>
+			<para>One Bonus feature of this handles } else {, in that it will unindent at the }, and when you have else {, it will know that the fold has increased again, so will on the next line increase the indent.</para>
+			<para>NOTE: This can only do it in one go (i.e. you can't go onto a line with }, and type in else {, and expect it to be indented on the next line, as it won't have known that it unindented for the }. I may be able to work around this at some point, so we shall see, but hopefully not too much of an issue.</para>
+			<para>Same goes for the Reindent file, because it doesn't actually have a logged decrement of the fold at } else {, it looks to the reindent code that it's remained at the same level ( so won't decrement the indentation for } else { )</para>
+		</sect2>
+
+		<sect2>
+			<title>Version 0.5, 2011-05-21</title>
+			<para>Idea behind this plugin is rather simple, if the fold level increases or decreases, so should the indentation.</para>
+			<para>Using C-like languages as an example:</para>
+			<para>Typing in { and pressing enter, will mean the line you are now on, has 1 more level of indent than the {.</para>
+			<para>Typing in } and pressing enter, will match the indentation of { line, so the } is now lined up properly.</para>
+			<para>There is also an option in the plugin menu to reindent the file based on the fold levels.</para>
+		</sect2>
+
+	</sect1>
+
+</article>
