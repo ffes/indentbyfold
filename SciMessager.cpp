@@ -1,28 +1,46 @@
+/////////////////////////////////////////////////////////////////////////////
+//                                                                         //
+//  IndentByFold - Auto indent based on the fold level                     //
+//  Copyright (C) 2011 Ben Bluemel   <ben1982@gmail.com>                   //
+//                                                                         //
+//  This program is free software; you can redistribute it and/or modify   //
+//  it under the terms of the GNU General Public License as published by   //
+//  the Free Software Foundation; either version 2 of the License, or      //
+//  (at your option) any later version.                                    //
+//                                                                         //
+//  This program is distributed in the hope that it will be useful,        //
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of         //
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the           //
+//  GNU General Public License for more details.                           //
+//                                                                         //
+//  You should have received a copy of the GNU General Public License      //
+//  along with this program; if not, write to the Free Software            //
+//  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.              //
+//                                                                         //
+/////////////////////////////////////////////////////////////////////////////
+
 #include <windows.h>
 #include "SciMessager.h"
 
 CSciMessager::CSciMessager( HWND hSciWnd )
 {
 	m_hSciWnd = hSciWnd;
-	pSciMsg = (SciFnDirect)SendMessage(m_hSciWnd,SCI_GETDIRECTFUNCTION, 0, 0);
-
-	pSciWndData = (sptr_t)SendMessage(m_hSciWnd,SCI_GETDIRECTPOINTER, 0, 0); 
+	m_pSciMsg = (SciFnDirect) SendMessage(m_hSciWnd, SCI_GETDIRECTFUNCTION, 0, 0);
+	m_pSciWndData = (sptr_t) SendMessage(m_hSciWnd, SCI_GETDIRECTPOINTER, 0, 0); 
 }
 
 CSciMessager::~CSciMessager()
 {
 }
 
-LRESULT CSciMessager::SendSciMsg( UINT uMsg, WPARAM wParam , LPARAM lParam )
+LRESULT CSciMessager::SendSciMsg( UINT uMsg, WPARAM wParam, LPARAM lParam )
 {
-	//return ::SendMessage( m_hSciWnd, uMsg, wParam, lParam );
-	return pSciMsg(pSciWndData, uMsg, wParam, lParam);
+	return m_pSciMsg(m_pSciWndData, uMsg, wParam, lParam);
 }
 
-LRESULT CSciMessager::SendSciMsg( UINT uMsg, WPARAM wParam , LPARAM lParam ) const
+LRESULT CSciMessager::SendSciMsg( UINT uMsg, WPARAM wParam, LPARAM lParam ) const
 {
-	//return ::SendMessage( m_hSciWnd, uMsg, wParam, lParam );
-	return pSciMsg(pSciWndData, uMsg, wParam, lParam);
+	return m_pSciMsg(m_pSciWndData, uMsg, wParam, lParam);
 }
 
 void CSciMessager::beginUndoAction()
@@ -63,7 +81,7 @@ int CSciMessager::getLineState( int line ) const
 int CSciMessager::getCaretInLine() const
 {
 	int curpos = SendSciMsg( SCI_GETCURRENTPOS );
-	int line = SendSciMsg( SCI_LINEFROMPOSITION,( WPARAM ) curpos );
+	int line = SendSciMsg( SCI_LINEFROMPOSITION, ( WPARAM ) curpos );
 	int startofline = SendSciMsg( SCI_POSITIONFROMLINE, ( WPARAM ) line );
 	return curpos - startofline;
 }
@@ -134,7 +152,6 @@ bool CSciMessager::isSelectionRectangle() const
 
 bool CSciMessager::isAutoCActive() const
 {
-
 	return SendSciMsg( SCI_AUTOCACTIVE ) ? true : false;
 }
 
