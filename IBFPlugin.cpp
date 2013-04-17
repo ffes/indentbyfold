@@ -2,7 +2,7 @@
 //                                                                         //
 //  IndentByFold - Auto indent based on the fold level                     //
 //  Copyright (C) 2011 Ben Bluemel   <ben1982@gmail.com>                   //
-//  Copyright (C) 2013 Frank Fesevur <fesevur@gmail.com                    //
+//  Copyright (C) 2013 Frank Fesevur <fesevur@gmail.com>                   //
 //                                                                         //
 //  This program is free software; you can redistribute it and/or modify   //
 //  it under the terms of the GNU General Public License as published by   //
@@ -271,16 +271,22 @@ void IBFPlugin::OnSciCharAdded( int ch )
 
 void IBFPlugin::reindentFile()
 {
+	// See FAQ in ReadMe for details about Python!
+	if (langType == L_PYTHON)
+	{
+		return;
+	}
+
 	WaitCursor wait;
 	CSciMessager sciMsgr(m_nppMsgr.getCurrentScintillaWnd());
 	sciMsgr.beginUndoAction();
 	int linecount = sciMsgr.getLineCount();
-	sciMsgr.setLineIndentation( 0, 0 );
+	sciMsgr.setLineIndentation(0, 0);
 	for (int line = 1; line <= linecount; line++)
 	{
 		indentLine(line, true);
 	}
-	sciMsgr.endUndoAction();	
+	sciMsgr.endUndoAction();
 }
 
 void IBFPlugin::indentLine( int line, bool doingwholefile )
