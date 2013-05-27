@@ -15,7 +15,7 @@
 
 	<sect1 id="introduction">
 		<title>Introduction</title>
-		<para>This plug-in uses fold points to indent the code. So if the fold level increases or decreases, so should the indentation.</para>
+		<para>IndentByFold is a plug-in for <ulink url="http://www.notepad-plus-plus.org/">Notepad++</ulink>. It uses fold points to indent the code. So if the fold level increases or decreases, so should the indentation.</para>
 	</sect1>
 
 	<sect1 id="install">
@@ -30,7 +30,7 @@
 
 	<sect1 id="contact">
 		<title>Contact</title>
-		<para>The plug-in's web page can be found at <ulink url="https://code.google.com/p/indentbyfold/">https://code.google.com/p/indentbyfold/</ulink>. The downloads and issue tracker can be found there as well.  The git repository is at <ulink url="https://github.com/ffes/indentbyfold">https://github.com/ffes/indentbyfold</ulink>.</para>
+		<para>The plug-in's web page can be found at <ulink url="https://code.google.com/p/indentbyfold/">https://code.google.com/p/indentbyfold/</ulink>. The downloads and issue tracker can be found there as well. The git repository is at <ulink url="https://github.com/ffes/indentbyfold">https://github.com/ffes/indentbyfold</ulink>.</para>
 		<para>If you have problems with, questions about or suggestions for IndentByFold and you want to contact me directly, you can send me an email at <ulink url="mailto:fesevur@gmail.com">fesevur@gmail.com</ulink>.</para>
 	</sect1>
 
@@ -65,6 +65,7 @@
 		<title>Wish list</title>
 		<itemizedlist>
 			<listitem><para>Reindent a selection.</para></listitem>
+			<listitem><para>Check if the Auto Indent checkbox in the Notepad++ settings has been unchecked.</para></listitem>
 		</itemizedlist>
 	</sect1>
 
