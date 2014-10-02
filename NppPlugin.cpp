@@ -31,7 +31,7 @@ void CNppPlugin::OnDllProcessAttach( HINSTANCE hDLLInstance )
 	nLen = lstrlen( m_szIniFileName );
 	while ( nLen-- > 0 ) {
 		if ( m_szIniFileName[nLen] == _T( '.' ) ) {
-			lstrcpy( m_szIniFileName + nLen + 1, _T( "ini" ) );
+			lstrcpy( m_szIniFileName + nLen + 1, L"ini" );
 			break;
 		}
 	}
