@@ -256,6 +256,7 @@ void IBFPlugin::OnSciCharAdded( int ch )
 	int eol = sciMsgr.getEOLMode();
 	if ( ch == '\n' || (eol == SC_EOL_CR && ch == '\r' ) )
 	{
+		indentLine( line-1, false );
 		indentLine( line, false );
 		isNewLine = true;
 		newLine = line;
@@ -282,49 +283,27 @@ void IBFPlugin::reindentFile()
 	sciMsgr.beginUndoAction();
 	int linecount = sciMsgr.getLineCount();
 	sciMsgr.setLineIndentation(0, 0);
-	for (int line = 1; line <= linecount; line++)
+	//in scintilla line are 0 based
+	for (int line = 0; line < linecount; line++)
 	{
 		indentLine(line, true);
 	}
 	sciMsgr.endUndoAction();
 }
 
+//TODO: remove doingwholefile, clean obsolete varaibles 
 void IBFPlugin::indentLine( int line, bool doingwholefile )
 {
 	CSciMessager sciMsgr( m_nppMsgr.getCurrentScintillaWnd() );
 	int getwidth = sciMsgr.getTabWidth();
-	int foldparentline = sciMsgr.getFoldParent( line );
-	int foldlevellastline = sciMsgr.getFoldLevel( line - 1 );
-	int foldlevellast = foldlevellastline & SC_FOLDLEVELNUMBERMASK;
-	int foldlevelcurline = sciMsgr.getFoldLevel( line );
-	int foldlevel = foldlevelcurline & SC_FOLDLEVELNUMBERMASK;
-
-	bool islastlinefoldparent = ( foldlevellastline & SC_FOLDLEVELHEADERFLAG) ? true : false;
-	int lastlinelength = sciMsgr.getLineEndPos( line - 1 ) -  sciMsgr.getPosFromLine( line - 1 );
-	int lastlineindent = sciMsgr.getLineIndentation( line - 1 ) / getwidth;
-	if ( !islastlinefoldparent && toggleDownUpLine == line - 1 )
-	{
-		islastlinefoldparent = true;
-	}
-
-	// If the Fold Parent is the line above the new line then we indent
-	if ( islastlinefoldparent && foldparentline != line && lastlinelength > lastlineindent )
-	{
-		int indent = sciMsgr.getLineIndentation( foldparentline );
-		sciMsgr.setLineIndentation(line, indent + getwidth);
-	}
-	else if ( doingwholefile && foldlevellast > foldlevel )
-	{
-		int foldparentline = sciMsgr.getFoldParent( line -1 );
-		int indent = sciMsgr.getLineIndentation( foldparentline );
-		sciMsgr.setLineIndentation( line -1, indent );
-		sciMsgr.setLineIndentation( line, indent );
-	}
-	else
-	{
-		int indent = sciMsgr.getLineIndentation( line -1 );
-		sciMsgr.setLineIndentation( line, indent );
-	}
+	int foldLevelCurLine = sciMsgr.getFoldLevel(line);
+	int foldLevel = foldLevelCurLine & SC_FOLDLEVELNUMBERMASK;
+	//the first 16 bits contain fold level of after this line (in 0x0FFF0000)
+	int foldLevelAfter = (foldLevelCurLine >> 16) & SC_FOLDLEVELNUMBERMASK;
+	int indentPos = (foldLevel - SC_FOLDLEVELBASE) * getwidth;
+	// move closing brackets down
+	if (foldLevel > foldLevelAfter) indentPos -= (foldLevel - foldLevelAfter) * getwidth;
+	sciMsgr.setLineIndentation(line, indentPos);
 }
 
 void IBFPlugin::OnNppSetInfo( const NppData& notpadPlusData )
