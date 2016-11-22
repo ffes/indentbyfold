@@ -16,7 +16,7 @@ RANLIB = $(ARCH)-ranlib
 WINDRES = $(ARCH)-windres
 
 #
-CFLAGS = -c -O2 -DUNICODE -mtune=i686
+CFLAGS = -c -O2 -DUNICODE -mtune=i686 -MMD -MP
 CXXFLAGS = $(CFLAGS) -W -Wall -gstabs -mwindows
 RESFLAGS = -O coff
 LIBS = -static -lshlwapi -lgdi32 -lcomdlg32 -lcomctl32
@@ -36,7 +36,7 @@ TARGET = $(PROGRAM).dll
 
 now: $(TARGET)
 
-all: clean depend now
+all: clean now
 
 PROGRAM_SRCS_CPP = \
 	IBFMenu.cpp \
@@ -53,18 +53,16 @@ PROGRAM_OBJS_CPP=$(PROGRAM_SRCS_CPP:.cpp=.o)
 PROGRAM_RC=$(PROGRAM)_res.rc
 PROGRAM_OBJS_RC=$(PROGRAM_RC:.rc=.o)
 
+PROGRAM_DEP_CPP=$(PROGRAM_SRCS_CPP:.cpp=.d)
+
 $(PROGRAM).dll: $(PROGRAM_OBJS_CPP) $(PROGRAM_OBJS_RC)
 	$(CXX) -o $@ $(PROGRAM_OBJS_CPP) $(PROGRAM_OBJS_RC) $(LDFLAGS) $(LIBS)
 
-depend: $(PROGRAM_SRCS_CPP)
-	$(CXX) -MM $^ > Makefile.depend
-
 clean:
-	rm -f $(PROGRAM_OBJS_CPP) $(PROGRAM_OBJS_C) $(PROGRAM_OBJS_RC) $(PROGRAM).dll $(PROGRAM).a tags tags.sqlite Makefile.depend
-	touch Makefile.depend
+	rm -f $(PROGRAM_OBJS_CPP) $(PROGRAM_OBJS_RC) $(PROGRAM_DEP_CPP) $(PROGRAM).dll $(PROGRAM).a tags tags.sqlite
 
 ### code dependencies ###
 
 $(PROGRAM)_res.o: $(PROGRAM)_res.rc Version.h
 
-include Makefile.depend
+-include $(PROGRAM_DEP_CPP)
