@@ -1,12 +1,10 @@
 #############################################################################
 #                                                                           #
-#             Makefile for building a MinGW NppSnippets.dll                 #
-#                                                                           #
-#  NOTE: remember to keep tabs in the file. Don't convert them to spaces!   #
+#              Makefile for building a MinGW IndentByFold.dll               #
 #                                                                           #
 #############################################################################
 
-.SUFFIXES: .exe .res .a .o .gch .c .cpp .cc .cxx .m .rc .p .f .F .r .y .l .s .S .def .h
+.SUFFIXES: .dll .o .c .cpp .rc .h
 
 ARCH = i686-w64-mingw32
 CC = $(ARCH)-gcc
@@ -60,6 +58,9 @@ $(PROGRAM).dll: $(PROGRAM_OBJS_CPP) $(PROGRAM_OBJS_RC)
 
 clean:
 	rm -f $(PROGRAM_OBJS_CPP) $(PROGRAM_OBJS_RC) $(PROGRAM_DEP_CPP) $(PROGRAM).dll $(PROGRAM).a tags tags.sqlite
+
+cppcheck:
+	cppcheck --quiet $(PROGRAM_SRCS_CPP)
 
 ### code dependencies ###
 
