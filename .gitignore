@@ -1,11 +1,7 @@
 __*
-*.LNK
-*.lnk
 *.suo
-*.ncb
 *.user
-*.opensdf
-*.sdf
-[Rr]elease/
-[Dd]ebug/
-ipch/
+*.VC.db
+*.opendb
+Win32/
+x64/
