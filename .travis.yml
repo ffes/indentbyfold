@@ -2,10 +2,14 @@ language: c++
 
 compiler: gcc
 
-before_install:
-  - sudo apt-get update -qq
-  - sudo apt-get install binutils-mingw-w64-i686 gcc-mingw-w64-i686 g++-mingw-w64-i686
-  - touch Makefile.depend
+sudo: false
+
+addons:
+  apt:
+    packages:
+      - binutils-mingw-w64-i686
+      - gcc-mingw-w64-i686
+      - g++-mingw-w64-i686
 
 script:
   - make
