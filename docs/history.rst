@@ -7,6 +7,10 @@ Version XXX (Yet To Be Released)
 -  Provide a 64-bit version of the plug-in.
 
 -  Converted the documentation from DocBook to reStructuredText.
+   The documentation is now hosted at `Read The Docs`_.
+
+
+.. _Read The Docs: http://nppsnippets.readthedocs.io
 
 
 Version 0.7.1 (2013-04-17)
