@@ -1,0 +1,32 @@
+name: Build
+
+on: [ push, pull_request ]
+
+jobs:
+
+  build:
+    runs-on: windows-latest
+    strategy:
+      max-parallel: 4
+      matrix:
+        build_configuration: [ Release, Debug ]
+        build_platform: [ x64, Win32 ]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - run: git fetch --prune --unshallow --tags
+
+      - name: Add MSBuild to PATH
+        uses: microsoft/setup-msbuild@v1.0.0
+
+      - name: Show MSBuild version
+        run: msbuild -version
+
+      - name: Run MSBuild
+        run: msbuild IndentByFold.vcxproj /m /p:configuration="${{ matrix.build_configuration }}" /p:platform="${{ matrix.build_platform }}"
+
+      - name: Archive artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: plugin_dll_(${{ matrix.build_platform }})_(${{ matrix.build_configuration }})
+          path: ${{ matrix.build_platform }}/${{ matrix.build_configuration }}/IndentByFold.dll

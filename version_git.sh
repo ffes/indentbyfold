@@ -21,7 +21,7 @@ function create_version_git_h()
 
 	# Get the version info from git
 	echo "Retrieving version information from git..."
-	VERSION=$(git describe --tags --abbrev=0 | grep -oP '\d+\.\d+\.\d+')
+	VERSION=$(git describe --tags --abbrev=0 | grep -oE '[0-9]+\.[0-9]+\.[0-9]+')
 	VERSION_NUMBERS=$(echo $VERSION | tr "." ","),0
 	GIT_VERSION=$(git describe --tags --match 'v[0-9]*')
 	YEAR=$(date +%Y)
