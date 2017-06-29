@@ -7,7 +7,12 @@
 .SUFFIXES: .dll .o .c .cpp .rc .h
 
 # For x64 build, ARCH=x86_64-w64-mingw32
+ifeq ($(BITS),64)
+ARCH = x86_64-w64-mingw32
+else
 ARCH = i686-w64-mingw32
+endif
+
 CC = $(ARCH)-gcc
 CXX = $(ARCH)-g++
 AR = $(ARCH)-ar
