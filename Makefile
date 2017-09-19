@@ -60,7 +60,7 @@ version_git.h:
 	$(SILENT) ./version_git.sh
 
 clean:
-	rm -f $(PROGRAM_OBJS_CPP) $(PROGRAM_OBJS_RC) $(PROGRAM_DEP_CPP) $(PROGRAM).dll $(PROGRAM).a tags tags.sqlite
+	rm -f $(PROGRAM_OBJS_CPP) $(PROGRAM_OBJS_RC) $(PROGRAM_DEP_CPP) $(PROGRAM).dll $(PROGRAM).a version_git.h tags tags.sqlite
 
 cppcheck:
 	cppcheck --quiet $(PROGRAM_SRCS_CPP)

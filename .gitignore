@@ -4,6 +4,9 @@ version_git.h
 *.user
 *.VC.db
 *.opendb
+*.o
+*.d
+*.dll
 Win32/
 x64/
 .vs/
