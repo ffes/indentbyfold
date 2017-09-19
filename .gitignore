@@ -6,3 +6,4 @@ version_git.h
 *.opendb
 Win32/
 x64/
+.vs/
