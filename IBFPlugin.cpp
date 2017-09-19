@@ -26,6 +26,7 @@
 #include "SciMessager.h"
 #include "WaitCursor.h"
 #include "Version.h"
+#include "version_git.h"
 
 extern IBFPlugin ibfplugin;
 
@@ -345,8 +346,8 @@ void IBFPlugin::aboutDlg()
 {
 	::MessageBox( m_nppMsgr.getNppWnd(),
 	              TEXT( "IndentByFold by Ben Bluemel, Frank Fesevur\n\n" )
-	              TEXT( "Version " ) VERSION_NUMBER_WSTR TEXT("\n\n")
-	              TEXT( "https://code.google.com/p/indentbyfold/" ),
+	              TEXT( "Version " ) VERSION_GIT_WSTR TEXT("\n\n")
+	              TEXT( "https://guthub.com/ffes/indentbyfold/" ),
 				  TEXT( "About IndentByFold" ),
 	              MB_OK );
 }

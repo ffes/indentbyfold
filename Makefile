@@ -53,8 +53,11 @@ PROGRAM_OBJS_RC=$(PROGRAM_RC:.rc=.o)
 
 PROGRAM_DEP_CPP=$(PROGRAM_SRCS_CPP:.cpp=.d)
 
-$(PROGRAM).dll: $(PROGRAM_OBJS_CPP) $(PROGRAM_OBJS_RC)
+$(PROGRAM).dll: version_git.h $(PROGRAM_OBJS_CPP) $(PROGRAM_OBJS_RC)
 	$(CXX) -o $@ $(PROGRAM_OBJS_CPP) $(PROGRAM_OBJS_RC) $(LDFLAGS) $(LIBS)
+
+version_git.h:
+	$(SILENT) ./version_git.sh
 
 clean:
 	rm -f $(PROGRAM_OBJS_CPP) $(PROGRAM_OBJS_RC) $(PROGRAM_DEP_CPP) $(PROGRAM).dll $(PROGRAM).a tags tags.sqlite

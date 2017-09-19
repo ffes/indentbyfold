@@ -1,4 +1,5 @@
 __*
+version_git.h
 *.suo
 *.user
 *.VC.db
