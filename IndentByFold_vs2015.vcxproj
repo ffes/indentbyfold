@@ -112,6 +112,9 @@
       <ImportLibrary>$(OutDir)IndentByFold.lib</ImportLibrary>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
+    <PreBuildEvent>
+      <Command>call $(SolutionDir)version_git.bat</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -133,6 +136,9 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <ImportLibrary>$(OutDir)IndentByFold.lib</ImportLibrary>
     </Link>
+    <PreBuildEvent>
+      <Command>call $(SolutionDir)version_git.bat</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -154,6 +160,9 @@
       <ImportLibrary>$(OutDir)IndentByFold.lib</ImportLibrary>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
+    <PreBuildEvent>
+      <Command>call $(SolutionDir)version_git.bat</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -174,6 +183,9 @@
       <SubSystem>Windows</SubSystem>
       <ImportLibrary>$(OutDir)IndentByFold.lib</ImportLibrary>
     </Link>
+    <PreBuildEvent>
+      <Command>call $(SolutionDir)version_git.bat</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="IBFMenu.cpp" />
