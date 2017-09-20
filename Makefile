@@ -13,21 +13,30 @@ AR = $(ARCH)-ar
 RANLIB = $(ARCH)-ranlib
 WINDRES = $(ARCH)-windres
 
+# Silent/verbose commands. For verbose output of commands set V=1
+V ?= 0
+ifeq ($(V), 0)
+	SILENT = @
+	V_CC = @echo [CC] $@;
+	V_CXX = @echo [CXX] $@;
+	V_RES = @echo [WINDRES] $@;
+endif
+
 #
-CFLAGS = -c -O2 -DUNICODE -mtune=i686 -MMD -MP
+CFLAGS = -c -O2 -DUNICODE -MMD -MP
 CXXFLAGS = $(CFLAGS) -W -Wall -gstabs -mwindows
 RESFLAGS = -O coff
 LIBS = -static -lshlwapi -lgdi32 -lcomdlg32 -lcomctl32
 LDFLAGS = -Wl,--out-implib,$(TARGET) -shared
 
 .c.o:
-	$(CC) $(CFLAGS) -o $@ $<
+	$(V_CC) $(CC) $(CFLAGS) -o $@ $<
 
 .cpp.o:
-	$(CXX) $(CXXFLAGS) -o $@ $<
+	$(V_CXX) $(CXX) $(CXXFLAGS) -o $@ $<
 
 .rc.o:
-	$(WINDRES) $(RESFLAGS) -o $@ -i $<
+	$(V_RES) $(WINDRES) $(RESFLAGS) -o $@ -i $<
 
 PROGRAM = IndentByFold
 TARGET = $(PROGRAM).dll
@@ -54,16 +63,18 @@ PROGRAM_OBJS_RC=$(PROGRAM_RC:.rc=.o)
 PROGRAM_DEP_CPP=$(PROGRAM_SRCS_CPP:.cpp=.d)
 
 $(PROGRAM).dll: version_git.h $(PROGRAM_OBJS_CPP) $(PROGRAM_OBJS_RC)
-	$(CXX) -o $@ $(PROGRAM_OBJS_CPP) $(PROGRAM_OBJS_RC) $(LDFLAGS) $(LIBS)
+	$(V_CXX) $(CXX) -o $@ $(PROGRAM_OBJS_CPP) $(PROGRAM_OBJS_RC) $(LDFLAGS) $(LIBS)
 
 version_git.h:
 	$(SILENT) ./version_git.sh
 
 clean:
-	rm -f $(PROGRAM_OBJS_CPP) $(PROGRAM_OBJS_RC) $(PROGRAM_DEP_CPP) $(PROGRAM).dll $(PROGRAM).a version_git.h tags tags.sqlite
+	@echo Cleaning
+	$(SILENT) rm -f $(PROGRAM_OBJS_CPP) $(PROGRAM_OBJS_RC) $(PROGRAM_DEP_CPP) $(PROGRAM).dll $(PROGRAM).a version_git.h tags tags.sqlite
 
 cppcheck:
-	cppcheck --quiet $(PROGRAM_SRCS_CPP)
+	@echo Running cppcheck
+	$(SILENT) cppcheck --quiet $(PROGRAM_SRCS_CPP)
 
 ### code dependencies ###
 
