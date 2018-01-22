@@ -6,12 +6,37 @@
 
 .SUFFIXES: .dll .o .c .cpp .rc .h
 
+# For x64 build, ARCH=x86_64-w64-mingw32
 ARCH = i686-w64-mingw32
 CC = $(ARCH)-gcc
 CXX = $(ARCH)-g++
 AR = $(ARCH)-ar
 RANLIB = $(ARCH)-ranlib
 WINDRES = $(ARCH)-windres
+
+# The general compiler flags
+CFLAGS = -c -DUNICODE
+# Enable almost all warnings
+CFLAGS += -W -Wall
+CXXFLAGS = $(CFLAGS)
+LIBS = -static -lshlwapi -lgdi32 -lcomdlg32 -lcomctl32
+LDFLAGS = -Wl,--out-implib,$(TARGET) -shared
+
+# Default target is RELEASE, otherwise DEBUG=1
+DEBUG ?= 0
+ifeq ($(DEBUG), 1)
+	# Add DEBUG define, debug info and specific optimizations
+	CFLAGS += -D_DEBUG -g -O0
+	CXXFLAGS += -D_DEBUG -g -O0
+	# Add dependencies flags
+	CFLAGS += -MMD -MP
+	CXXFLAGS += -MMD -MP
+else
+	# Set the optimizations
+	OPT = -fexpensive-optimizations -Os -O2
+	# Strip the dll
+	LDOPT = -s
+endif
 
 # Silent/verbose commands. For verbose output of commands set V=1
 V ?= 0
@@ -21,13 +46,6 @@ ifeq ($(V), 0)
 	V_CXX = @echo [CXX] $@;
 	V_RES = @echo [WINDRES] $@;
 endif
-
-#
-CFLAGS = -c -O2 -DUNICODE -MMD -MP
-CXXFLAGS = $(CFLAGS) -W -Wall -gstabs -mwindows
-RESFLAGS = -O coff
-LIBS = -static -lshlwapi -lgdi32 -lcomdlg32 -lcomctl32
-LDFLAGS = -Wl,--out-implib,$(TARGET) -shared
 
 .c.o:
 	$(V_CC) $(CC) $(CFLAGS) -o $@ $<
