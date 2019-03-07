@@ -16,8 +16,7 @@
 //Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
 
-#ifndef __IBFPLUGIN_H__
-#define __IBFPLUGIN_H__
+#pragma once
 
 #include "NppPlugin.h"
 #include "NPP/PluginInterface.h"
@@ -30,8 +29,8 @@ public:
 	};
 
 	static const TCHAR* PLUGIN_NAME;
-private:
 	
+private:
 	bool decrementAfterAutoC;
 	bool decrementAfterPaint;
 	int linetodecrement;
@@ -84,5 +83,3 @@ protected:
 	static LRESULT nppCallWndProc( HWND, UINT, WPARAM, LPARAM );
 	static LRESULT CALLBACK nppNewWndProc( HWND, UINT, WPARAM, LPARAM );
 };
-
-#endif

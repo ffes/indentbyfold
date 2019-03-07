@@ -19,8 +19,7 @@
 //                                                                         //
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef __SCI_MESSAGER_H__
-#define __SCI_MESSAGER_H__
+#pragma once
 
 #include "NPP/Scintilla.h"
 
@@ -86,5 +85,3 @@ protected:
 	SciFnDirect m_pSciMsg;
 	sptr_t m_pSciWndData;
 };
-
-#endif

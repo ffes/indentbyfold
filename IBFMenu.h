@@ -1,6 +1,4 @@
-#ifndef __IBF_MENU_H__
-#define __IBF_MENU_H__
-//---------------------------------------------------------------------------
+#pragma once
 
 #include "NppPluginMenu.h"
 
@@ -23,5 +21,3 @@ public:
 	static void		openOnlineManual();
 	static void		aboutDlg();
 };
-//---------------------------------------------------------------------------
-#endif

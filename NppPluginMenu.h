@@ -1,6 +1,4 @@
-#ifndef __NPP_PLUGIN_MENU_H__
-#define __NPP_PLUGIN_MENU_H__
-//----------------------------------------------------------------------------
+#pragma once
 
 #include "NppMessager.h"
 
@@ -18,6 +16,3 @@ public:
 
 	void setNppData( const NppData& nppd );
 };
-
-//----------------------------------------------------------------------------
-#endif
