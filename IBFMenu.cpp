@@ -1,5 +1,4 @@
 #include <windows.h>
-#include <tchar.h>
 #include "IBFMenu.h"
 #include "IBFPlugin.h"
 
