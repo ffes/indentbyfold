@@ -1,9 +1,6 @@
-__*
+_*
 version_git.h
-*.suo
 *.user
-*.VC.db
-*.opendb
 *.o
 *.d
 *.dll
