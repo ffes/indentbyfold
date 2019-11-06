@@ -9,7 +9,7 @@ FuncItem IBFMenu::arrFuncItems[N_NBFUNCITEMS] = {
 	{ L"", NULL, 0, false, NULL }, // separator
 	{ L"Open Online Manual", openOnlineManual, 0, false, NULL },
 	{ L"", NULL, 0, false, NULL }, // separator
-	{ L"About", aboutDlg, 0, false, NULL }
+	{ L"About...", aboutDlg, 0, false, NULL }
 };
 
 void IBFMenu::reIndentFile()
