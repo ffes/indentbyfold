@@ -2,7 +2,7 @@
 //                                                                         //
 //  IndentByFold - Auto indent based on the fold level                     //
 //  Copyright (C) 2011 Ben Bluemel   <ben1982@gmail.com>                   //
-//  Copyright (C) 2013 Frank Fesevur <fesevur@gmail.com>                   //
+//  Copyright (C) 2013-2019 Frank Fesevur <fesevur@gmail.com>              //
 //                                                                         //
 //  This program is free software; you can redistribute it and/or modify   //
 //  it under the terms of the GNU General Public License as published by   //
@@ -60,13 +60,12 @@ const TCHAR* IBFPlugin::nppGetName()
 	return 0;
 }
 
-void IBFPlugin::OnLangChanged( uptr_t idFrom ) 
+void IBFPlugin::OnLangChanged( uptr_t idFrom )
 {
-	useNextLine = false;
+	UNREFERENCED_PARAMETER(idFrom);
+
 	m_nppMsgr.SendNppMsg( NPPM_GETCURRENTLANGTYPE, (WPARAM) 0, (LPARAM) & langType );
-	if ( langType == L_RUBY || langType == L_HTML || langType == L_LISP || langType == L_LUA  || langType == L_PASCAL || langType == L_XML ) {
-		useNextLine = true;
-	}
+	useNextLine = (langType == L_RUBY || langType == L_HTML || langType == L_LISP || langType == L_LUA  || langType == L_PASCAL || langType == L_XML);
 }
 
 void IBFPlugin::nppBeNotified( SCNotification* notifyCode )
@@ -115,7 +114,7 @@ void IBFPlugin::nppBeNotified( SCNotification* notifyCode )
 				if ( postoblame == curpos && ( curFold == foldleveltomatch || notifyCode->nmhdr.code == SCN_PAINTED )  ) {
 
 					// Only interested in this if we are completing on the actual text
-					if ( autocselection && postoblame == notifyCode->position + strlen( notifyCode->text ) ) {
+					if ( autocselection && postoblame == notifyCode->position + (int) strlen( notifyCode->text ) ) {
 						sciMsgr.SendSciMsg( SCI_AUTOCCANCEL );
 						sciMsgr.setLineIndentation( curline, indentationtouse );
 						lastFoldDownLine = curline;
@@ -316,7 +315,7 @@ void IBFPlugin::indentLine( int line, bool doingwholefile )
 	}
 	else if ( doingwholefile && foldlevellast > foldlevel )
 	{
-		int foldparentline = sciMsgr.getFoldParent( line -1 );
+		foldparentline = sciMsgr.getFoldParent( line -1 );
 		int indent = sciMsgr.getLineIndentation( foldparentline );
 		sciMsgr.setLineIndentation( line -1, indent );
 		sciMsgr.setLineIndentation( line, indent );
@@ -344,10 +343,10 @@ void IBFPlugin::OnNppSetInfo( const NppData& notpadPlusData )
 
 void IBFPlugin::aboutDlg()
 {
-	::MessageBox( m_nppMsgr.getNppWnd(),
-	              TEXT( "IndentByFold by Ben Bluemel, Frank Fesevur\n\n" )
-	              TEXT( "Version " ) VERSION_GIT_WSTR TEXT("\n\n")
-	              TEXT( "https://github.com/ffes/indentbyfold/" ),
-				  TEXT( "About IndentByFold" ),
-	              MB_OK );
+	MessageBox(m_nppMsgr.getNppWnd(),
+				L"IndentByFold by Ben Bluemel, Frank Fesevur\n\n"
+				L"Version " VERSION_GIT_WSTR L"\n\n"
+				L"https://github.com/ffes/indentbyfold/",
+				L"About IndentByFold",
+				MB_OK);
 }
