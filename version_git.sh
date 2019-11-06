@@ -10,7 +10,7 @@ fi
 if type git >/dev/null 2>&1
 then
 	# Get the latest git commit
-	VERSION=$(git describe --tags)
+	VERSION=$(git describe --tags --match 'v[0-9]*')
 
 	# Has the version changed?
 	if ! grep --quiet $VERSION version_git.h
