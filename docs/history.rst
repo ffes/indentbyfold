@@ -1,8 +1,8 @@
 Revision History
 ================
 
-Version XXX (Yet To Be Released)
---------------------------------
+Version 0.7.2 (2019-11-07)
+--------------------------
 
 -  Provide a 64-bit version of the plug-in.
 
@@ -10,7 +10,7 @@ Version XXX (Yet To Be Released)
    The documentation is now hosted at `Read The Docs`_.
 
 
-.. _Read The Docs: http://nppsnippets.readthedocs.io
+.. _Read The Docs: https://nppsnippets.readthedocs.io
 
 
 Version 0.7.1 (2013-04-17)

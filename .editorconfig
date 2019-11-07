@@ -18,3 +18,6 @@ insert_final_newline = false
 indent_size = 2
 indent_style = space
 end_of_line = lf
+
+[*.{py,sh}]
+end_of_line = lf
