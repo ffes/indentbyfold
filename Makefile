@@ -101,6 +101,6 @@ cppcheck:
 
 ### code dependencies ###
 
-$(PROGRAM)_res.o: $(PROGRAM)_res.rc Version.h
+$(PROGRAM)_res.o: $(PROGRAM)_res.rc version_git.h
 
 -include $(PROGRAM_DEP_CPP)
