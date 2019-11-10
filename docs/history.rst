@@ -1,6 +1,15 @@
 Revision History
 ================
 
+Version 0.7.3 (2019-11-10)
+--------------------------
+
+-  Fix how version numbers were retrieved. In the ``v0.7.2`` DLLs it still said v0.7.1.
+   Now the version numbers are completely based upon the git repository.
+   The version in the documentation still need to be updated manually,
+   but that is probably not possible due to the automatic processing by Read The Docs.
+
+
 Version 0.7.2 (2019-11-07)
 --------------------------
 
