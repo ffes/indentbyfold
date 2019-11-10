@@ -87,7 +87,7 @@ void IBFPlugin::nppBeNotified( SCNotification* notifyCode )
 		default:
 			break;
 		}
-		
+
 		// <<< notifications from Notepad++
 	} else {
 		bool autocselection = false;
@@ -105,7 +105,7 @@ void IBFPlugin::nppBeNotified( SCNotification* notifyCode )
 			if ( ( notifyCode->nmhdr.code != SCN_PAINTED && decrementAfterAutoC ) || (notifyCode->nmhdr.code == SCN_PAINTED && decrementAfterPaint ) ) {
 				if ( decrementAfterPaint ) decrementAfterPaint = false;
 				else decrementAfterAutoC = false;
-				
+
 				CSciMessager sciMsgr( m_nppMsgr.getCurrentScintillaWnd() );
 				int curpos = sciMsgr.getCurrentPos();
 				int curline = sciMsgr.getLineFromPos(curpos);
@@ -122,12 +122,11 @@ void IBFPlugin::nppBeNotified( SCNotification* notifyCode )
 						lastFoldDownLine = curline;
 					}
 				}
-				
 			}
 			break;
 		case SCN_MODIFIED:
 			if ( notifyCode->modificationType & SC_MOD_CHANGEFOLD ) {
-				
+
 				int foldlevelNowMask = notifyCode->foldLevelNow;
 				bool foldlevelnowishead = false;
 				if ( foldlevelNowMask & SC_FOLDLEVELWHITEFLAG ) {
@@ -156,7 +155,7 @@ void IBFPlugin::nppBeNotified( SCNotification* notifyCode )
 					foldlevelNowMask = foldlevelNowMask2;
 					foldlevelPrevMask = foldlevelPrevMask2;
 				}
-				
+
 				if ( foldlevelNowMask < foldlevelPrevMask ) {
 					CSciMessager sciMsgr( m_nppMsgr.getCurrentScintillaWnd() );
 					int curline =  sciMsgr.getLineFromPos(sciMsgr.getCurrentPos());
@@ -165,27 +164,27 @@ void IBFPlugin::nppBeNotified( SCNotification* notifyCode )
 						if ( curline == notifyCode->line - 1) {
 							actualline--;
 						}
-						
+
 						int foldparentline = sciMsgr.getFoldParent( actualline );
 						toggleDownUpLine = -1;
 						if (foldlevelnowishead) {
 							foldparentline = sciMsgr.getFoldParent( actualline -1 );
 						}
 						int foldlevelparent = sciMsgr.getFoldLevel( foldparentline );
-					
+
 						if ( shifted ) {
 							foldlevelparent = foldlevelparent >> 16;
 						} else {
 							foldlevelparent = foldlevelparent & SC_FOLDLEVELNUMBERMASK;
 						}
 						// The or here is for nppCF with cfelse/cfelseif
-						if (	foldlevelparent == foldlevelPrevMask || 
+						if ( foldlevelparent == foldlevelPrevMask ||
 								( foldlevelNowMask == foldlevelparent && foldlevelnowishead ) ||
 								( actualline == notifyCode->line -1 && foldlevelparent == foldlevelPrevMask -1 )
 								) {
 							int indent = sciMsgr.getLineIndentation( foldparentline );
 							if ( sciMsgr.isAutoCActive() ) {
-								// store it 
+								// store it
 								foldleveltomatch = notifyCode->foldLevelNow;
 
 								decrementAfterAutoC = true;
