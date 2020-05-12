@@ -1,5 +1,5 @@
-Revision History
-================
+Changelog
+=========
 
 Version 0.7.3 (2019-11-10)
 --------------------------
@@ -18,7 +18,6 @@ Version 0.7.2 (2019-11-07)
 -  Converted the documentation from DocBook to reStructuredText.
    The documentation is now hosted at `Read The Docs`_.
 
-
 .. _Read The Docs: https://nppsnippets.readthedocs.io
 
 
@@ -29,7 +28,7 @@ Version 0.7.1 (2013-04-17)
 
 -  Fixed: Reindent file is now one undo action.
 
--  Fixed: Disabled "Reindent File" for Python, see :ref:`the FAQ <faq_python>`
+-  Fixed: Disabled ``Reindent File`` for Python, see :ref:`the FAQ <faq_python>`
    for more details.
 
 -  Restructured the source files to personal preference.
@@ -38,12 +37,12 @@ Version 0.7.1 (2013-04-17)
 
 -  Started to write documentation using DocBook. This is the first
    result. The current FAQ is based upon issues posted on `Ben's
-   BitBucket`_ page. The revision history until version 0.7 are taken
+   BitBucket`_ page. The revision history until version 0.7 was taken
    from the `forum post`_ about this plug-in.
 
 .. _FAQ: #faq_python_1
 .. _Ben's BitBucket: https://bitbucket.org/bbluemel/indentbyfold/issues
-.. _forum post: http://sourceforge.net/p/notepad-plus/discussion/482781/thread/246f82f6
+.. _forum post: https://sourceforge.net/p/notepad-plus/discussion/482781/thread/246f82f6
 
 
 Version 0.7 (2011-09-18)
