@@ -12,11 +12,8 @@
 # All configuration values have a default; values that are commented out
 # serve to show the default.
 
-import sys
-import os
-
-# Check if we run on RTD or locally
-on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
+import sys, os
+from datetime import datetime
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -47,7 +44,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'IndentByFold'
-copyright = '2010-2019, Frank Fesevur'
+copyright = "2010-{:%Y}, Frank Fesevur" . format(datetime.now())
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -101,7 +98,7 @@ pygments_style = 'sphinx'
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = 'default'
+html_theme = 'sphinx_rtd_theme'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -110,16 +107,6 @@ html_theme = 'default'
 
 # Add any paths that contain custom themes here, relative to this directory.
 #html_theme_path = []
-
-# See if the RTD theme is installed locally
-# Based on RTD FAQ and the RTD-theme install instruction
-# http://read-the-docs.readthedocs.io/en/latest/faq.html
-# https://github.com/snide/sphinx_rtd_theme
-
-if not on_rtd:
-	if os.path.exists('_themes/sphinx_rtd_theme'):
-		html_theme_path = [ '_themes', ]
-		html_theme = 'sphinx_rtd_theme'
 
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> documentation".
