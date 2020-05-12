@@ -1,6 +1,13 @@
 Changelog
 =========
 
+Next Version (YYYY-MM-DD)
+-------------------------
+
+-  Added a :ref:`FAQ item <faq_if_else>` that the plugin indents wrong in
+   certain ``if else`` situations in various languages.
+
+
 Version 0.7.3 (2019-11-10)
 --------------------------
 
