@@ -25,19 +25,20 @@ Building the documentation
 The documentation of IndentByFold is written in `reStructuredText`_ and hosted
 on `Read The Docs`_.
 
-To build on Windows you need `Python Sphinx`_. When using Cygwin you can install
-the ``python-sphinx`` and ``make`` packages.
+To build you need `Python Sphinx`_ and the `Sphinx RTD Theme`_.
+
+You can build it with native Python Sphinx on Windows, WSL or Cygwin.
 
 Use ``make html`` in the ``docs`` directory to generate the documentation.
 Other forms of output are not used, but might work.
 
-If you want the local docs the look like Read The Docs:
-- Clone the `Sphinx RTD Theme`_.
-- Create a directory named ``_themes`` in the ``docs`` directory.
-- There you need to create a symlink to the ``sphinx_rtd_theme`` subdirectory
-  in the cloned repo.
+You can also build it is use the included ``Dockerfile``.
 
-.. _reStructuredText: http://docutils.sourceforge.net/rst.html
+Run ``docker build -t python-sphinx .`` to build the image and
+use ``docker run --rm -ti -v "%CD%":/docs python-sphinx make html``
+to build the docs.
+
+.. _reStructuredText: https://docutils.sourceforge.io/rst.html
 .. _Read The Docs: https://readthedocs.org/
-.. _Python Sphinx: http://www.sphinx-doc.org/
-.. _Sphinx RTD Theme: https://github.com/snide/sphinx_rtd_theme/
+.. _Python Sphinx: https://www.sphinx-doc.org/
+.. _Sphinx RTD Theme: https://sphinx-rtd-theme.readthedocs.io/
