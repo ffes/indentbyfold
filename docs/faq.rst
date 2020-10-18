@@ -28,6 +28,19 @@ level to be the same as the current.
 
 ----------------------------------------------------------------------
 
+.. _faq_reindent_fails:
+
+**Q:** The ``Reindent File`` command doesn't always work.
+
+**A:** I investigated this quite thoroughly and think it has to do with caching
+in Scintilla [1]_ or Notepad++ itself, although I obviously don't want to rule
+out that it is something in the plugin. See `issue #2`_ for more details.
+
+The easy work-around is to go to the last line of your file, run the command
+``Reindent File`` from there and see that your file is reindented as expected.
+
+----------------------------------------------------------------------
+
 .. _faq_if_else:
 
 **Q:** The plugin indents wrong in certain ``if else`` situations in various languages
@@ -89,7 +102,7 @@ I have many other projects (online and offline) that need my attention
 I don't see that happen any time soon.
 
 That all being said, I understand your problem. I will obviously gladly review
-and merge pull requests that solve these problems.
+and merge pull requests that solve these problems. See `issue #1`_ for more details.
 
 Know that when your style look like this, everything works as expected.
 Note that the ``}`` is not on the same line as a ``{``.
@@ -106,6 +119,8 @@ Note that the ``}`` is not on the same line as a ``{``.
         }
     }
 
+.. _issue #1: https://github.com/ffes/indentbyfold/issues/1
+.. _issue #2: https://github.com/ffes/indentbyfold/issues/2
 
 .. [1] `Scintilla`_ is the source code editing component that Notepad++ is built around.
 

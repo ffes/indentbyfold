@@ -7,6 +7,9 @@ Next Version (YYYY-MM-DD)
 -  Added a :ref:`FAQ item <faq_if_else>` that the plugin indents wrong in
    certain ``if else`` situations in various languages.
 
+-  Added a :ref:`FAQ item <faq_reindent_fails>` that the command ``Reindent
+   File`` fails in certain situations.
+
 
 Version 0.7.3 (2019-11-10)
 --------------------------
