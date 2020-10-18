@@ -19,6 +19,9 @@ function create_version_git_h()
 	# Make sure there is a file, but don't touch it if not needed
 	[[ -f version_git.h ]] || touch version_git.h
 
+	# Make sure the locale is set properly
+	export LANG=en_US.UTF8
+
 	# Get the version info from git
 	echo "Retrieving version information from git..."
 	VERSION=$(git describe --tags --abbrev=0 | grep -oP '\d+\.\d+\.\d+')
