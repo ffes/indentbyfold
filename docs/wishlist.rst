@@ -14,3 +14,5 @@ Wish list
 
 -  Sometimes the plug-in changes a file after opening it. Not sure when that
    happens exactly.
+
+-  Option to change indentation from singular tab to 4 spaces.
